@@ -1,11 +1,13 @@
 package com.example.jetpackcomposecodelab.mysoothe
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -33,7 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpackcomposecodelab.ui.theme.JetpackComposeCodeLabTheme
+import com.example.jetpackcomposecodelab.ui.theme.AppTheme
 import com.example.jetpackcomposecodelab.R
 
 class MySoothe: ComponentActivity() {
@@ -56,7 +58,8 @@ class MySoothe: ComponentActivity() {
             onValueChange = {},
             modifier = modifier
                 .fillMaxWidth()
-                .heightIn(min = 56.dp),
+                .heightIn(min = 56.dp)
+                .background(MaterialTheme.colorScheme.background),
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Search,
@@ -113,6 +116,7 @@ class MySoothe: ComponentActivity() {
             Row(
                 verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.width(255.dp)
+                    .background(MaterialTheme.colorScheme.surfaceVariant)
             ) {
                 Image(
                     painter = painterResource(drawable),
@@ -165,7 +169,9 @@ class MySoothe: ComponentActivity() {
         modifier: Modifier = Modifier,
         content: @Composable () -> Unit
     ) {
-        Column(modifier) {
+        Column(modifier = modifier
+            .background(MaterialTheme.colorScheme.background)
+        ) {
             Text(
                 text = stringResource(title),
                 style = MaterialTheme.typography.titleMedium,
@@ -275,7 +281,7 @@ class MySoothe: ComponentActivity() {
 
     @Composable
     fun MySootheAppPortrait() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             Scaffold(
                 bottomBar = { SootheBottomNavigation() }
             ) { padding ->
@@ -286,10 +292,12 @@ class MySoothe: ComponentActivity() {
 
     @Composable
     fun MySootheAppLandscape() {
-        JetpackComposeCodeLabTheme {
-            Row {
-               SootheNavigationRail()
-                HomeScreen()
+        AppTheme {
+            Surface(tonalElevation = 100.dp) {
+                Row {
+                    SootheNavigationRail()
+                    HomeScreen()
+                }
             }
         }
     }
@@ -328,7 +336,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun SearchBarPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             SearchBar(modifier = Modifier.padding(all = 10.dp))
         }
     }
@@ -336,7 +344,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun AlignYourBodyElementPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             AlignYourBodyElement(
                 drawable = R.drawable.ab1_inversions,
                 text = R.string.ab1_inversions,
@@ -348,7 +356,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun FavoriteCollectionCardPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             FavoriteCollectionCard(
                 drawable = R.drawable.fc2_nature_meditations,
                 text = R.string.fc2_nature_meditations,
@@ -360,7 +368,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun AlignYourBodyRowPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             AlignYourBodyRow()
         }
     }
@@ -368,7 +376,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun FavoriteCollectionsGridPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             FavoriteCollectionsGrid()
         }
     }
@@ -376,7 +384,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun HomeSectionPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             HomeSection(R.string.align_your_body) {
                 AlignYourBodyRow()
             }
@@ -386,7 +394,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, widthDp = 320)
     @Composable
     fun HomeScreenPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             HomeScreen()
         }
     }
@@ -394,7 +402,7 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, widthDp = 320)
     @Composable
     fun SootheBottomNavigationPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             SootheBottomNavigation()
         }
     }
@@ -408,11 +416,17 @@ class MySoothe: ComponentActivity() {
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE)
     @Composable
     fun SootheNavigationRailPreview() {
-        JetpackComposeCodeLabTheme {
+        AppTheme {
             SootheNavigationRail()
         }
     }
 
+    @Preview(
+        showBackground = true,
+        heightDp = 480, widthDp = 640,
+        uiMode = Configuration.UI_MODE_NIGHT_YES,
+        name = "Dark"
+    )
     @Preview(showBackground = true, backgroundColor = 0xFFF5F0EE, heightDp = 480, widthDp = 640)
     @Composable
     fun MySootheAppLandscapePreview() {

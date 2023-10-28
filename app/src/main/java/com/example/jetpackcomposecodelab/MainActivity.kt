@@ -22,13 +22,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.jetpackcomposecodelab.ui.theme.JetpackComposeCodeLabTheme
+import com.example.jetpackcomposecodelab.ui.theme.AppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            JetpackComposeCodeLabTheme {
+            AppTheme {
                 MyApp(modifier = Modifier.fillMaxSize())
             }
         }
@@ -132,11 +132,10 @@ fun OnBoardingScreen(modifier: Modifier = Modifier, onContinueClicked: () -> Uni
     uiMode = UI_MODE_NIGHT_YES,
     name = "Dark"
 )
-
 @Preview(showBackground = true, widthDp = 320)
 @Composable
 fun DefaultPreview() {
-    JetpackComposeCodeLabTheme {
+    AppTheme {
         MyApp(Modifier.fillMaxSize())
     }
 }
@@ -144,7 +143,7 @@ fun DefaultPreview() {
 @Preview(showBackground = true, widthDp = 320, heightDp = 320)
 @Composable
 fun PreviewOnBoardingScreen() {
-    JetpackComposeCodeLabTheme {
+    AppTheme {
         OnBoardingScreen(onContinueClicked = {})
     }
 }
